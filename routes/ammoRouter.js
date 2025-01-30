@@ -6,7 +6,7 @@ const router = express.Router();
 
 
 router.get('/', (req, res) => {
-    res.render('home', {data:[], searchQuery: ''});
+    res.render('ammo', {data:[], searchQuery: ''});
 });
 
 
