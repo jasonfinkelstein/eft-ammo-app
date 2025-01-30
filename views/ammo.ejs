@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Tarkov Data</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+        <link rel="stylesheet" href="/stylesheets/ammoStyle.css" />
+    </head>
+
+
+
+
+    <body>
+
+        <div>
+            <div class="heading">
+                <img src="/img/eft-logo-white.png" alt="">
+                <h1 class="text-center"><a href="/ammo">EFT Ammo Info</a></h1>
+            </div>
+            
+            <form action="/ammo" method="GET" class="search-form">
+              <input type="text" name="search" placeholder="Enter ammo" class="search-box">
+
+              
+              <div class="forms">
+                <!-- Dropdown instead of radio buttons -->
+                <div class="form-group">
+                  <div class="form-group-header">Sort By:</div>
+                  <select name="sortBy" class="dropdown">
+                    <option value="caliber">Caliber</option>
+                    <option value="penetrationPower">Penetration</option>
+                    <option value="damage">Damage</option>
+                    <option value="armorDamage">Armor Damage</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <div class="form-group-header">Sort Order:</div>
+                  <label><input type="radio" name="sortOrder" value="asc">Ascending</label>
+                  <label><input type="radio" name="sortOrder" value="desc">Descending</label>
+                </div>
+              </div>
+              
+              
+              
+              
+              <!-- <div class="forms">
+                  <div class="form-group">
+                    <div class="form-group-header">Sort By:</div>
+                    <label><input type="radio" name="sortBy" value="caliber">Caliber</label>
+                    <label><input type="radio" name="sortBy" value="penetrationPower">Penetration</label>
+                    <label><input type="radio" name="sortBy" value="damage">Damage</label>
+                    <label><input type="radio" name="sortBy" value="armorDamage">Armor Damage</label>
+                    
+                  </div>
+                  <div class="form-group">
+                    <div class="form-group-header">Sort Order:</div>
+                    <label><input type="radio" name="sortOrder" value="asc">Ascending</label>
+                    <label><input type="radio" name="sortOrder" value="desc">Descending</label>
+                  </div>
+              </div> -->
+
+              <button type="submit" class="search-button">Search</button>
+            </form>
+
+
+        </div>
+
+        
+        <!-- <% if (searchQuery) { %> -->
+        <% if (searchQuery != '') { %>
+            <h2 class="results-for-h2">Search Results for "<%= searchQuery.toUpperCase() %>":</h2>
+            <% } %>
+            <!-- <% } %> -->
+            
+        <div class="container">
+                  <% if (data.length > 0) { %>
+          
+          
+                    <% data.forEach((ammo)=> { %>
+                        <div class="full-card">
+                            <div class="item-card">
+                                <img src="<%= ammo.item.image512pxLink %>">
+                                <div class = "info-card">
+                                    <a href="<%= ammo.item.wikiLink%>"><%= ammo.item.name %></a>
+                                    <!-- <h3><%= ammo.item.name %></h3> -->
+                                    <p>Damage: <%= ammo.damage %></p>
+                                    <p>Penetration: <%= ammo.penetrationPower %></p>
+                                    <p>Armor Damage: <%= ammo.armorDamage %></p>
+                                </div>
+                            </div>
+                                <div class="prices">
+                                    <p>Base Trader Price: ₽<%= ammo.item.basePrice %></p>
+
+                                    <% if (ammo.item.avg24hPrice == null) { %>
+                                        <p>Cannot be listed on flea!%></p>
+                                    <% } else { %>
+                                        <p>Avg 24h Flea Price: ₽<%= ammo.item.avg24hPrice %></p>
+                                    <% } %>
+                                </div>
+                        </div>
+                    <% }) %>
+                <% } %>
+                
+
+
+        </div>
+
+
+
+
+
+    </body>
+
+</html>
